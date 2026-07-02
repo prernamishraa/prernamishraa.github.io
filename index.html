@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Prerna — reading, writing, moving. Based in New Delhi.">
+<title>prerna</title>
+
+<!--
+  ————————————————————————————————————————————
+  Hey Prerna! Quick guide to editing this file:
+
+  1. Search for "TODO" to find every placeholder link you need to fill in.
+  2. To add new writing/reading items, copy an <li> block and edit it.
+  3. To change your intro copy, edit the text inside <section id="hello">.
+  4. "last updated" auto-updates every time you re-save/re-deploy this file.
+     No need to touch it manually.
+  ————————————————————————————————————————————
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #FDFDFC;
+    --text: #1B1B1A;
+    --muted: #8A8880;
+    --subtle: #C8C6C0;
+    --border: #ECEAE4;
+    --hover-bg: #F5F3EE;
+  }
+  [data-theme="dark"] {
+    --bg: #13120F;
+    --text: #EDEBE6;
+    --muted: #7C7A73;
+    --subtle: #3A3833;
+    --border: #26241F;
+    --hover-bg: #1C1A16;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Fraunces', Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 380;
+    font-size: 17px;
+    line-height: 1.65;
+    min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .app {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 88px 48px 120px;
+    gap: 88px;
+    min-height: 100vh;
+  }
+
+  /* ————— SIDEBAR ————— */
+  .sidebar {
+    position: sticky;
+    top: 88px;
+    align-self: start;
+    height: max-content;
+  }
+
+  .sig {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 24px;
+    letter-spacing: -0.015em;
+    margin-bottom: 40px;
+    color: var(--text);
+  }
+
+  .nav ul { list-style: none; }
+  .nav li { margin-bottom: 4px; }
+  .nav a {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 2px 0;
+    transition: color 0.15s ease;
+  }
+  .nav a:hover { color: var(--text); }
+  .nav a.active {
+    color: var(--text);
+    border-bottom: 1px solid var(--text);
+  }
+
+  .meta {
+    margin-top: 56px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.75;
+    letter-spacing: 0.02em;
+  }
+  .meta span { display: block; }
+
+  /* ————— MAIN ————— */
+  main { max-width: 620px; }
+
+  section { display: none; }
+  section.active { display: block; animation: fadeIn 0.35s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    font-weight: 300;
+    font-size: 44px;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  h2 {
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: lowercase;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 44px 0 14px;
+  }
+
+  p { margin-bottom: 18px; }
+
+  a.inline {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--subtle);
+    transition: text-decoration-color 0.15s;
+  }
+  a.inline:hover { text-decoration-color: var(--text); }
+
+  /* item lists (writing pieces, books, articles) */
+  ul.plain { list-style: none; margin: 4px 0 20px; }
+  ul.plain li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+  }
+  ul.plain li:last-child { border-bottom: none; }
+  ul.plain a {
+    color: var(--text);
+    text-decoration: none;
+    flex: 1;
+    transition: opacity 0.15s;
+  }
+  ul.plain a:hover { opacity: 0.6; }
+  ul.plain .date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  /* connect page link rows */
+  .link-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    transition: padding-left 0.2s ease;
+  }
+  .link-row:hover { padding-left: 8px; }
+  .link-row .label { font-style: italic; font-size: 18px; }
+  .link-row .handle {
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ————— MODE TOGGLE ————— */
+  .mode-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 100;
+  }
+  .mode-toggle:hover {
+    color: var(--text);
+    border-color: var(--text);
+  }
+
+  /* ————— MOBILE ————— */
+  @media (max-width: 768px) {
+    .app {
+      grid-template-columns: 1fr;
+      padding: 40px 24px 120px;
+      gap: 40px;
+    }
+    .sidebar { position: static; }
+    .sig { margin-bottom: 20px; }
+    .nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 20px;
+    }
+    .nav li { margin: 0; }
+    .meta { margin-top: 28px; }
+    h1 { font-size: 34px; }
+    body { font-size: 16px; }
+  }
+
+  ::selection { background: var(--text); color: var(--bg); }
+</style>
+</head>
+
+<body data-theme="light">
+
+<div class="app">
+
+  <!-- ————— SIDEBAR ————— -->
+  <aside class="sidebar">
+    <div class="sig">prerna.</div>
+    <nav class="nav">
+      <ul>
+        <li><a href="#hello" data-section="hello">hello</a></li>
+        <li><a href="#experiments" data-section="experiments">experiments</a></li>
+        <li><a href="#work" data-section="work">work</a></li>
+        <li><a href="#writing" data-section="writing">writing</a></li>
+        <li><a href="#reading" data-section="reading">reading</a></li>
+        <li><a href="#connect" data-section="connect">connect</a></li>
+      </ul>
+    </nav>
+    <div class="meta">
+      <span>new delhi, in</span>
+      <span id="local-time">—</span>
+      <span id="last-updated">last updated: —</span>
+    </div>
+  </aside>
+
+  <!-- ————— MAIN ————— -->
+  <main>
+
+    <!-- HELLO -->
+    <section id="hello" class="active">
+      <h1>hey, I'm Prerna.</h1>
+      <p>Born and brought up in New Delhi.</p>
+      <p>I currently work at <a class="inline" href="https://www.1mg.com" target="_blank" rel="noopener">Tata 1mg</a> in the consumer product business.</p>
+      <p>I love to read, write, and move.</p>
+      <p>This is a small corner of the internet where I keep notes on the things I'm making, reading, and thinking about. It's a work in progress, like most things worth doing.</p>
+    </section>
+
+    <!-- EXPERIMENTS -->
+    <section id="experiments">
+      <h1>experiments</h1>
+      <p>Small things I run on the side, mostly because I got curious.</p>
+
+      <h2>the newsletter club</h2>
+      <p>A WhatsApp community for people who read newsletters the way others read novels — obsessively, with strong opinions.</p>
+      <p>We swap recommendations, argue about writing, and occasionally send each other essays at 2am. Because why should book clubs get all the fun?</p>
+      <!-- TODO: replace the # with your WhatsApp community invite link -->
+      <p><a class="inline" href="#" target="_blank" rel="noopener">→ join the community</a></p>
+    </section>
+
+    <!-- WORK -->
+    <section id="work">
+      <h1>work</h1>
+      <p>I'm currently building consumer product at <a class="inline" href="https://www.1mg.com" target="_blank" rel="noopener">Tata 1mg</a> — India's largest online pharmacy and digital healthcare platform.</p>
+      <p>I care about products that show up for people in moments that actually matter, and healthcare is one of the biggest of those.</p>
+
+      <h2>previously</h2>
+      <ul class="plain">
+        <!-- TODO: fill in a past role, or delete this <li> if you'd rather not list any yet -->
+        <li>
+          <a href="#" target="_blank" rel="noopener">Add a previous role or project →</a>
+          <span class="date">year</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- WRITING -->
+    <section id="writing">
+      <h1>writing</h1>
+      <p>I write on Substack, mostly slow-cooked essays about things I've been thinking through.</p>
+      <!-- TODO: replace # with your Substack URL -->
+      <p><a class="inline" href="#" target="_blank" rel="noopener">→ read on substack</a></p>
+
+      <h2>recent</h2>
+      <ul class="plain">
+        <!-- TODO: replace with your actual essays. Copy the <li> block to add more. -->
+        <li>
+          <a href="#" target="_blank" rel="noopener">Add your first essay title here</a>
+          <span class="date">2026</span>
+        </li>
+        <li>
+          <a href="#" target="_blank" rel="noopener">And another one</a>
+          <span class="date">2026</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- READING -->
+    <section id="reading">
+      <h1>reading</h1>
+      <p>Books, articles, films — everything in between. Updated when I remember, which is more often than not.</p>
+
+      <h2>books</h2>
+      <ul class="plain">
+        <!-- TODO: replace with what you're actually reading -->
+        <li>
+          <a href="#" target="_blank" rel="noopener">Currently reading — add a title</a>
+          <span class="date">now</span>
+        </li>
+        <li>
+          <a href="#" target="_blank" rel="noopener">Recently finished — add a title</a>
+          <span class="date">jun 2026</span>
+        </li>
+      </ul>
+      <!-- TODO: replace # with your Goodreads URL -->
+      <p><a class="inline" href="#" target="_blank" rel="noopener">→ full shelf on goodreads</a></p>
+
+      <h2>articles</h2>
+      <ul class="plain">
+        <!-- TODO: replace with articles you've read and want to share. Copy <li> to add more. -->
+        <li>
+          <a href="#" target="_blank" rel="noopener">Add an article title</a>
+          <span class="date">jul 2026</span>
+        </li>
+      </ul>
+
+      <h2>films</h2>
+      <!-- TODO: replace # with your Letterboxd URL -->
+      <p><a class="inline" href="#" target="_blank" rel="noopener">→ what I've been watching on letterboxd</a></p>
+    </section>
+
+    <!-- CONNECT -->
+    <section id="connect">
+      <h1>connect</h1>
+      <p>The best way to reach me is on any of these. I read everything, even when I don't reply right away.</p>
+
+      <!-- TODO: replace every # with your actual profile URL, and replace @handle with your real handles -->
+      <a class="link-row" href="#" target="_blank" rel="noopener">
+        <span class="label">substack</span>
+        <span class="handle">@handle</span>
+      </a>
+      <a class="link-row" href="#" target="_blank" rel="noopener">
+        <span class="label">twitter</span>
+        <span class="handle">@handle</span>
+      </a>
+      <a class="link-row" href="#" target="_blank" rel="noopener">
+        <span class="label">instagram</span>
+        <span class="handle">@handle</span>
+      </a>
+      <a class="link-row" href="#" target="_blank" rel="noopener">
+        <span class="label">linkedin</span>
+        <span class="handle">/in/handle</span>
+      </a>
+      <a class="link-row" href="#" target="_blank" rel="noopener">
+        <span class="label">goodreads</span>
+        <span class="handle">/handle</span>
+      </a>
+      <a class="link-row" href="#" target="_blank" rel="noopener">
+        <span class="label">letterboxd</span>
+        <span class="handle">/handle</span>
+      </a>
+      <a class="link-row" href="mailto:you@example.com">
+        <span class="label">email</span>
+        <span class="handle">you@example.com</span>
+      </a>
+    </section>
+
+  </main>
+</div>
+
+<button class="mode-toggle" id="modeToggle">DARK MODE</button>
+
+<script>
+  // ————— SECTION ROUTING —————
+  const links = document.querySelectorAll('.nav a');
+  const sections = document.querySelectorAll('main section');
+
+  function showSection(id) {
+    let found = false;
+    sections.forEach(s => {
+      const match = s.id === id;
+      s.classList.toggle('active', match);
+      if (match) found = true;
+    });
+    if (!found) {
+      document.getElementById('hello').classList.add('active');
+      id = 'hello';
+    }
+    links.forEach(l => l.classList.toggle('active', l.dataset.section === id));
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const id = link.dataset.section;
+      history.pushState(null, '', '#' + id);
+      showSection(id);
+      e.preventDefault();
+    });
+  });
+
+  window.addEventListener('popstate', () => {
+    const id = location.hash.replace('#', '') || 'hello';
+    showSection(id);
+  });
+
+  const initial = location.hash.replace('#', '') || 'hello';
+  showSection(initial);
+
+  // ————— DARK MODE —————
+  const body = document.body;
+  const toggle = document.getElementById('modeToggle');
+
+  function setTheme(theme) {
+    body.setAttribute('data-theme', theme);
+    toggle.textContent = theme === 'dark' ? 'LIGHT MODE' : 'DARK MODE';
+    try { localStorage.setItem('theme', theme); } catch(e) {}
+  }
+
+  let saved = 'light';
+  try { saved = localStorage.getItem('theme') || 'light'; } catch(e) {}
+  setTheme(saved);
+
+  toggle.addEventListener('click', () => {
+    const current = body.getAttribute('data-theme');
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  // ————— LAST UPDATED (auto from file's last-modified date) —————
+  const lastMod = new Date(document.lastModified);
+  const dateOpts = { year: 'numeric', month: 'short', day: 'numeric' };
+  document.getElementById('last-updated').textContent =
+    'last updated: ' + lastMod.toLocaleDateString('en-US', dateOpts).toLowerCase();
+
+  // ————— LIVE LOCAL TIME IN DELHI —————
+  function updateTime() {
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+      timeZone: 'Asia/Kolkata'
+    });
+    document.getElementById('local-time').textContent = timeStr + ' ist';
+  }
+  updateTime();
+  setInterval(updateTime, 60000);
+</script>
+
+</body>
+</html>
