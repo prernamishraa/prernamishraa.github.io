@@ -508,20 +508,7 @@
     transform: rotate(var(--tilt, 0deg)) translateY(var(--drop, 0px));
     transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.15), box-shadow 0.35s ease;
   }
-  /* washi tape strip holding each print up */
-  .photo::before {
-    content: "";
-    position: absolute;
-    top: -13px;
-    left: 50%;
-    width: 76px;
-    height: 26px;
-    transform: translateX(-50%) rotate(var(--tape-tilt, -2deg));
-    background: rgba(230, 219, 188, 0.85);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.10);
-    clip-path: polygon(2% 6%, 97% 0%, 100% 92%, 1% 100%);  /* slightly torn edges */
-    z-index: 1;
-  }
+ 
   [data-theme="dark"] .photo {
     background: #EDEBE6;
     box-shadow: 0 2px 6px rgba(0,0,0,0.4), 0 12px 28px rgba(0,0,0,0.35);
@@ -560,9 +547,6 @@
   .photo:nth-child(5n+5) { --tilt: -1.5deg; }
   .photo:nth-child(3n+2) { --drop: 28px; }
   .photo:nth-child(3n+3) { --drop: 12px; }
-  .photo:nth-child(7n+2) { --tape-tilt: -6deg; }
-  .photo:nth-child(7n+4) { --tape-tilt: 4deg; }
-  .photo:nth-child(7n+6) { --tape-tilt: 1deg; }
   .photo:nth-child(4n+1) { --ratio: 4 / 5; }   /* some portrait prints */
   .photo:nth-child(6n+3) { --ratio: 5 / 4; }   /* some landscape prints */
 
